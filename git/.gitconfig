@@ -3,4 +3,4 @@
 	email = shaun@sierraalpha.co.nz
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore_global
