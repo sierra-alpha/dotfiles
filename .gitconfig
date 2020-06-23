@@ -1,0 +1,6 @@
+[user]
+	name = Shaun Alexander
+	email = shaun@sierraalpha.co.nz
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
