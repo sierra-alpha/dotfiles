@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Adds .scripts to the path, if it doesn't exist appends
+# custom .bashrc call to end of bashrc if it doesn't exist
+
+# merge my add-tobashrc script into system .bashrc
+touch ~/.temp
+git merge-file --union ~/.bashrc ~/.temp ~/.scripts/.add-to-bashrc 
+rm ~/.temp
