@@ -27,6 +27,7 @@ def main(raw_args=None):
 
     for repo in repos:
 
+        import pdb; pdb.set_trace()
         print(repo)
 
     # systemctl --user --now enable \
