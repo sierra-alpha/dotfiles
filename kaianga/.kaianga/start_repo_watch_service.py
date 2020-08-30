@@ -12,7 +12,8 @@ def main(raw_args=None):
         description=("Parses the repos-to-watch file and sets up"
                      "A service that starts on boot to automatically"
                      "push those files"
-                     )
+        )
+    )
 
     parser.add_argument(
         "-u",
