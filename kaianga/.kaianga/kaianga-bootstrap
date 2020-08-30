@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# apt install and pip install
+
 # Take dotfile branch as an option and then install that.
 
 # Stow
