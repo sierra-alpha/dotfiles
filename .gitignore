@@ -1,0 +1,15 @@
+*
+!bash/.bash_env
+!bash/.bash_profile
+!my-bashrc
+
+!emacs/
+
+!git/
+!.gitignore
+
+!kaianga
+
+!scripts
+
+!spacemacs

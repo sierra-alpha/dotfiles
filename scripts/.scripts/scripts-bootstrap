@@ -1,9 +1,22 @@
 #!/bin/bash
 
+# Stow
+
+# global git ignore
+git config --global core.excludesfile ~/.gitignore_global
+
 # Adds .scripts to the path, if it doesn't exist appends
 # custom .bashrc call to end of bashrc if it doesn't exist
-
 # merge my add-tobashrc script into system .bashrc
 touch ~/.temp
 git merge-file --union ~/.bashrc ~/.temp ~/.scripts/.add-to-bashrc 
 rm ~/.temp
+
+
+# Setsup git watch to associated folders
+cwd1=$(echo cwd)
+cd ~/bin
+git clone https://github.com/gitwatch/gitwatch.git
+install -b gitwatch.sh /usr/local/bin/gitwatch
+
+
