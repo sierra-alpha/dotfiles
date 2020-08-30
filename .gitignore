@@ -1,15 +1,13 @@
 *
-!bash/.bash_env
-!bash/.bash_profile
-!my-bashrc
+!bash/
 
 !emacs/
 
 !git/
 !.gitignore
 
-!kaianga
+!kaianga/
 
-!scripts
+!scripts/
 
-!spacemacs
+!spacemacs/
