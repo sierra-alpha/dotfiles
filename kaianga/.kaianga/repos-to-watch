@@ -1,2 +1,2 @@
-# Branch | Repo Location
-master     ~/dotfiles
+# -r <Remote> -b <Branch> <Local Repo Location>
+-r origin -b master ~/dotfiles

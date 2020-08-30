@@ -7,7 +7,7 @@
 # Global git config (Modify ~/.gitconfig instead)
 
 # set bash as default shell
-chsh --shell /bin/bash
+# chsh --shell /bin/bash
 
 # Adds .scripts to the path, if it doesn't exist appends
 
@@ -17,7 +17,6 @@ chsh --shell /bin/bash
 touch ~/.temp
 git merge-file --union ~/.bashrc ~/.temp ~/.scripts/.add-to-bashrc
 rm ~/.temp
-exec "$SHELL"
 
 # Should we generate key here? (Probably better)
 # Add public Key to GH - Should read user name from config
@@ -33,7 +32,7 @@ install -b gitwatch.sh /usr/local/bin/gitwatch
 
 cd "$cwd1"
 
-gitwatch.sh -b $(tail -n +1 ~/.kaianga/repos-to-watch)
+gitwatch $(tail -n +2 ~/.kaianga/repos-to-watch)
 mkdir -p "$HOME/.config/systemd/user" && cp gitwatch@.service $HOME/.config/systemd/user
 systemctl --user --now enable \
           gitwatch@$(systemd-escape "'-r url/to/repository' /path/to/folder").service
