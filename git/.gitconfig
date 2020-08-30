@@ -4,3 +4,5 @@
 [core]
 	editor = vim
 	excludesfile = /home/shaun/.gitignore_global
+[url "git@github.com:"]
+	insteadOf = https://github.com/
