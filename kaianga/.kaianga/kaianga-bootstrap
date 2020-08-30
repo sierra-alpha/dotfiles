@@ -32,7 +32,7 @@ install -b gitwatch.sh /usr/local/bin/gitwatch
 
 cd "$cwd1"
 
-gitwatch $(tail -n +2 ~/.kaianga/repos-to-watch)
+gitwatch $(tail -n +2 ~/.kaianga/repos-to-watch) &
 mkdir -p "$HOME/.config/systemd/user" && cp gitwatch@.service $HOME/.config/systemd/user
 systemctl --user --now enable \
           gitwatch@$(systemd-escape "'-r url/to/repository' /path/to/folder").service
