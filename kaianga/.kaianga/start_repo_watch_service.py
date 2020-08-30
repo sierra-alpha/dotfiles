@@ -32,7 +32,7 @@ def main(raw_args=None):
         repo_path = os.path.join("home", user, repo[2:]) if "~" in repo else repo
 
         import pdb; pdb.set_trace()
-        os.chdir(repo)
+        os.chdir(repo_path)
         print(repo)
 
     # systemctl --user --now enable \
