@@ -2,5 +2,5 @@
 # remote and branch as key value pair sub dict
 
 ["~/dotfiles"]
-remote = origin
-branch = master
+remote = 'origin'
+branch = 'master'
