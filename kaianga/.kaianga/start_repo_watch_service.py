@@ -8,26 +8,27 @@ repos = toml.load("repos-to-watch.toml")
 def main(raw_args=None):
 
     parser = argparse.ArgumentParser(
-        description=("Get the relevant info to execute a "
-                     "Docker Build command that supports build secrets")
-    )
+        description=("Parses the repos-to-watch file and sets up"
+                     "A service that starts on boot to automatically"
+                     "push those files"
+                     )
 
     parser.add_argument(
-        "-d",
-        "--leave-dirty",
-        action="store_true",
-        default=False,
-        help=("If set this will leave the password files "
-              "in the directory when finished")
+        "-u",
+        "--user",
+        help=("Give a user name to change ~ to /home/<user>")
     )
 
     args = parser.parse_args(raw_args)
 
+    user = args.user
+
     for repo in repos:
 
+        print(repo)
 
-    systemctl --user --now enable \
-              gitwatch@$(systemd-escape "'-r url/to/repository' '-b branch' /path/to/folder").service
+    # systemctl --user --now enable \
+    #           gitwatch@$(systemd-escape "'-r url/to/repository' '-b branch' /path/to/folder").service
 
 if __name__ == "__main__":
     main()
