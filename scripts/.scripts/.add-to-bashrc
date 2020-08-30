@@ -1,6 +1,6 @@
 
 # These additions are made at runtime
 
-if [ -f ~/.my_bashrc]; then
+if [ -f ~/.my_bashrc ]; then
     . ~/.my_bashrc
 fi
