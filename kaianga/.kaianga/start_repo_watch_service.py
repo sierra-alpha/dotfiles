@@ -28,6 +28,7 @@ def main(raw_args=None):
     for repo in repos:
 
         repo_path = os.path.join("home", user, repo[2:]) if "~" in repo else repo
+
         import pdb; pdb.set_trace()
         os.chdir(repo)
         print(repo)
