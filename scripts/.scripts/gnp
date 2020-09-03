@@ -87,7 +87,7 @@ function github_new_project() {
     git add .
     echo "git commit -m \"Repo initialisation\""
     git commit -m "Repo initialisation"
-    . $(dirname $BASH_SOURCE)/ghrc.sh "$user" "$reponame" "$private" "${description[@]}" 
+    . $(dirname $BASH_SOURCE)/ghrc "$user" "$reponame" "$private" "${description[@]}"
     if git ls-remote --quiet --exit-code &>/dev/null; then
 	local datetime=`date +%F-%H-%M-%S`
 	echo -e "Old origin exists, renaming original origin\ngit remote rename origin origin-$datetime"
