@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 apt-get update && apt-get \
   install -y \
     curl emacs git inotify-tools python3 \
