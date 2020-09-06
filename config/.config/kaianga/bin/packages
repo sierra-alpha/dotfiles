@@ -1,6 +1,6 @@
 #!/bin/bash
 
-su -m root -c pt-get update && apt-get \
+apt-get update && apt-get \
   install -y \
     curl emacs git inotify-tools python3 \
     stow wget
