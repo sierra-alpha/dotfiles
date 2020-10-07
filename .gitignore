@@ -1,3 +1,0 @@
-log/.log/*
-supervisor./supervisord/supervisor.sock
-supervisor./supervisord/log/*
