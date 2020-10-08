@@ -21,3 +21,5 @@ shopt -s checkwinsize
 
 # I like colours!
 force_color_prompt=yes
+
+# This is a test
