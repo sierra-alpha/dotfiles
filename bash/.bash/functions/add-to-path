@@ -1,0 +1,38 @@
+# Add directories to $PATH iff they're not already there
+# Append directories to $PATH by default
+# Based on https://unix.stackexchange.com/a/4973/143394
+# and https://unix.stackexchange.com/a/217629/143394
+
+# And I got it from here: https://superuser.com/a/1269166
+
+add_to_path () {
+  local prepend  # Prepend to path if set
+  local prefix   # Temporary prepended path
+  local IFS      # Avoid restoring for added laziness
+
+  case $1 in
+    after)  shift;; # Default is to append
+    before) prepend=true; shift;;
+  esac
+
+  for arg; do
+    IFS=: # Split argument by path separator
+    for dir in $arg; do
+      # Canonicalise symbolic links
+      dir=$({ cd -- "$dir" && { pwd -P || pwd; } } 2>/dev/null)
+      if [ -z "$dir" ]; then continue; fi  # Skip non-existent directory
+      case ":$PATH:" in
+        *":$dir:"*) :;; # skip - already present
+        *) if [ "$prepend" ]; then
+           # ${prefix:+$prefix:} will expand to "" if $prefix is empty to avoid
+           # starting with a ":".  Expansion is "$prefix:" if non-empty.
+            prefix=${prefix+$prefix:}$dir
+          else
+            PATH=$PATH:$dir  # Append by default
+          fi;;
+      esac
+    done
+  done
+  [ "$prepend" ] && PATH=$prefix:$PATH
+}
+
