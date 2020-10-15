@@ -9,6 +9,9 @@ fi # This is a new fi, don't confuse it with a new one.
 # (This is normally handled in .bash_env but containers don't always use that).
 add_to_path $HOME/bin:$HOME/bin/my-bin
 
+# Add local pip to path
+add_to_path "$(python3 -m site --user-base)"/bin
+
 # Make sure man uses less
 export PAGER=less
 
