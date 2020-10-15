@@ -1,5 +1,10 @@
 # My custom additions to a systems .bashrc
 
+# Functions, load all my functions form the functions folder
+if [ -d ~/.bash/functions ]; then
+    for f in ~/.bash/functions/*; do source "$f"; done
+fi # This is a new fi, don't confuse it with a new one.
+
 # Add my ~/bin to the path so my own custom scripts work. 
 # (This is normally handled in .bash_env but containers don't always use that).
 export PATH=$PATH:$HOME/bin:$HOME/bin/my-bin
