@@ -4,6 +4,9 @@
 # (This is normally handled in .bash_env but containers don't always use that).
 export PATH=$PATH:$HOME/bin:$HOME/bin/my-bin
 
+# Make sure man uses less
+export PAGER=less
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
