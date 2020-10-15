@@ -1,4 +1,4 @@
-# Add directories to $PATH iff they're not already there
+# Add directories to $PATH if they're not already there
 # Append directories to $PATH by default
 # Based on https://unix.stackexchange.com/a/4973/143394
 # and https://unix.stackexchange.com/a/217629/143394
