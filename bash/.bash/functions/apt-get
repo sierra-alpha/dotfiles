@@ -1,6 +1,6 @@
 #! /bin/bash
 
-apt-get () {
-    builtin apt-get "==>" "$@"
+apt-get-and-save () {
+    apt-get "$@"
     apt-mark showmanual > ~/kaianga-conf/bin/packages
 }
