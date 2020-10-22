@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# custom .bashrc call to end of bashrc if it doesn't exist
-# merge my add-tobashrc script into system .bashrc
-touch ~/.temp
-git merge-file --union ~/.bashrc ~/.temp bin/.add-to-bashrc
-rm ~/.temp
