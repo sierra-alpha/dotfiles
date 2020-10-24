@@ -45,7 +45,7 @@ values."
      better-defaults
      emacs-lisp
      git
-     (markdown :variables markdown-live-preview-engine 'vmd)
+     markdown
      org
      (shell :variables
             shell-default-height 30
