@@ -1,0 +1,58 @@
+
+In evil-cp--skip-whitespace-and-comments:
+evil-cleverparens-util.el:271:21:Warning: looking-back called with 1 argument,
+    but requires 2-3
+
+In evil-cp--backward-up-list:
+evil-cleverparens-util.el:291:15:Warning: ‘in-string-p’ is an obsolete
+    function (as of 25.1); use (nth 3 (syntax-ppss)) instead.
+evil-cleverparens-util.el:295:41:Warning: ‘in-string-p’ is an obsolete
+    function (as of 25.1); use (nth 3 (syntax-ppss)) instead.
+
+In evil-cp--up-list:
+evil-cleverparens-util.el:311:15:Warning: ‘in-string-p’ is an obsolete
+    function (as of 25.1); use (nth 3 (syntax-ppss)) instead.
+evil-cleverparens-util.el:315:41:Warning: ‘in-string-p’ is an obsolete
+    function (as of 25.1); use (nth 3 (syntax-ppss)) instead.
+
+In evil-cp-backward-symbol-begin:
+evil-cleverparens.el:989:21:Warning: function ‘evil-cp-backward-symbol-begin’
+    defined multiple times in this file
+
+In evil-cp--slurp-backward-from-opening:
+evil-cleverparens.el:1028:15:Warning: looking-back called with 1 argument, but
+    requires 2-3
+
+In evil-cp-delete-enclosing:
+evil-cleverparens.el:1660:14:Warning: looking-back called with 1 argument, but
+    requires 2-3
+evil-cleverparens.el:1660:14:Warning: ‘delete-backward-char’ is for
+    interactive use only; use ‘delete-char’ instead.
+
+In evil-cp--wrap-next:
+evil-cleverparens.el:1714:14:Warning: assignment to free variable ‘end’
+evil-cleverparens.el:1718:24:Warning: reference to free variable ‘end’
+
+In evil-cp--wrap-previous:
+evil-cleverparens.el:1737:29:Warning: assignment to free variable ‘beg’
+evil-cleverparens.el:1743:24:Warning: reference to free variable ‘beg’
+
+In evil-cp-insert:
+evil-cleverparens.el:1886:16:Warning: looking-back called with 1 argument, but
+    requires 2-3
+evil-cleverparens.el:1886:16:Warning: looking-back called with 1 argument, but
+    requires 2-3
+evil-cleverparens.el:1886:16:Warning: looking-back called with 1 argument, but
+    requires 2-3
+
+In evil-cp-append:
+evil-cleverparens.el:1917:16:Warning: looking-back called with 1 argument, but
+    requires 2-3
+evil-cleverparens.el:1918:16:Warning: looking-back called with 1 argument, but
+    requires 2-3
+
+In evil-cp--enable-surround-operators:
+evil-cleverparens.el:2128:17:Warning: reference to free variable
+    ‘evil-surround-operator-alist’
+evil-cleverparens.el:2129:17:Warning: assignment to free variable
+    ‘evil-surround-operator-alist’
