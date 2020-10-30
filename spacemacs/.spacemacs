@@ -493,8 +493,9 @@ before packages are loaded."
   ;; Enable heading up/down a line by pressing `h` or `l` at beginning or end
   (setq-default evil-cross-lines t)
 
-  ;; Column widths set to 80 and a guide line
+  ;; Column widths set to 80 and set all buffers to display guide line
   (setq-default fill-column 80)
+  (add-hook 'after-change-major-mode-hook 'fci-mode)
 
   ;; Set markdown mode to have fci and 
 
