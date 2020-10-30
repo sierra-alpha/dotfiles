@@ -495,6 +495,7 @@ before packages are loaded."
 
   ;; Column widths set to 80 and set all buffers to display guide line
   (setq-default fill-column 80)
+  (setq fci-rule-color "darkblue")
   (add-hook 'after-change-major-mode-hook 'fci-mode)
 
   ;; Set markdown mode to auto fill to column width 9may eventually want to apply
