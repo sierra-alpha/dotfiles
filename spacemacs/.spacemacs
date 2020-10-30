@@ -501,7 +501,7 @@ before packages are loaded."
     (lambda ()
       (if buffer-file-name (fci-mode 1)))
     )
-  (add-hook 'after-change-major-mode-hook 'global-fci-mode 1)
+  (global-fci-mode 1)
 
   ;; Set markdown mode to auto fill to column width 9may eventually want to apply
   ;; to all text buffers (non code buffers)
