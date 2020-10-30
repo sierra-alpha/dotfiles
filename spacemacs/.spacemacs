@@ -498,9 +498,7 @@ before packages are loaded."
   (setq-default fill-column 80)
   (setq fci-rule-color "grey25")
   (add-hook 'after-change-major-mode-hook
-            (lambda ()
-              (when (buffer-file-name) (fci-mode 1))
-            )
+            (when (buffer-file-name) (fci-mode 1))
   )
 
   ;; Set markdown mode to auto fill to column width 9may eventually want to apply
