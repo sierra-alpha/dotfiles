@@ -499,7 +499,7 @@ before packages are loaded."
   (setq fci-rule-color "grey25")
   (add-hook 'after-change-major-mode-hook
             (lambda ()
-              (when (buffer-file-mode) (fci-mode 1))
+              (when (buffer-file-name) (fci-mode 1))
             )
   )
 
