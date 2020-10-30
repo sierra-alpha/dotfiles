@@ -497,7 +497,9 @@ before packages are loaded."
   ;; visit a file to display the guide line
   (setq-default fill-column 80)
   (setq fci-rule-color "grey25")
-  (global-display-fill-column-indicator-mode t)
+  (add-hook 'after-change-major-mode-hook
+            '(when (buffer-file-mode) (fci-mode 1))
+  )
 
   ;; Set markdown mode to auto fill to column width 9may eventually want to apply
   ;; to all text buffers (non code buffers)
