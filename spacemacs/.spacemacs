@@ -499,7 +499,8 @@ before packages are loaded."
   (setq fci-rule-color "grey25")
   (define-globalized-minor-mode global-fci-mode fci-mode
     (lambda ()
-      (if buffer-file-name (fci-mode 1))))
+      (if buffer-file-name (fci-mode 1)))
+    )
   (add-hook 'after-change-major-mode-hook 'global-fci-mode)
 
   ;; Set markdown mode to auto fill to column width 9may eventually want to apply
