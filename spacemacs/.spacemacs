@@ -489,7 +489,15 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  ;; Enable heading up/down a line by pressing `h` or `l` at beginning or end
   (setq-default evil-cross-lines t)
+
+  ;; Auto revert buffers when files change on disk (if not modified)
+  ;; Taken from here: http://pragmaticemacs.com/emacs/automatically-revert-buffers/
+  (global-auto-revert-mode 1)
+  ;; Do the same for Dired
+  (add-hook 'dired-mode-hook 'auto-revert-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
