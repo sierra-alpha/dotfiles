@@ -493,6 +493,10 @@ before packages are loaded."
   ;; Enable heading up/down a line by pressing `h` or `l` at beginning or end
   (setq-default evil-cross-lines t)
 
+  ;; Column widths set to 80 and a guilde line
+
+  ;; Set markdown mode to have fci and 
+
   ;; Auto revert buffers when files change on disk (if not modified)
   ;; Taken from here: http://pragmaticemacs.com/emacs/automatically-revert-buffers/
   (global-auto-revert-mode 1)
