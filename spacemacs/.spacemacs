@@ -499,7 +499,7 @@ before packages are loaded."
   (setq fci-rule-color "grey25")
   ;;(define-globalized-minor-mode global-fci-mode fci-mode
   ;;  (lambda ()
-  ;;    (if buffer-file-name (fci-mode 1)))
+  ;;    (when (buffer-file-name) (fci-mode 1))
   ;;  )
   ;;(global-fci-mode 1)
 
