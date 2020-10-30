@@ -497,7 +497,9 @@ before packages are loaded."
   (setq-default fill-column 80)
   (add-hook 'after-change-major-mode-hook 'fci-mode)
 
-  ;; Set markdown mode to have fci and 
+  ;; Set markdown mode to auto fill to column width 9may eventually want to apply
+  ;; to all text buffers (non code buffers)
+  (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 
   ;; Auto revert buffers when files change on disk (if not modified)
   ;; Taken from here: http://pragmaticemacs.com/emacs/automatically-revert-buffers/
