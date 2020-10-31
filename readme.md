@@ -1,6 +1,6 @@
 This is a home for all my dot files, some repos such as .emacs have their own
-liscence files and credits, for everything else assume the GPL3 liscen mentioned
-in liscences.md
+licence files and credits, for everything else assume the GPL3 licenses mentioned
+in licences.md
 
 The Dotfiles to get my specific config in kainga
 Copyright (C) 2020 Shaun Alexander
