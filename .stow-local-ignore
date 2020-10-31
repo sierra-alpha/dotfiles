@@ -1,2 +1,4 @@
-license.txt
-readme.md
+^/license.*
+^/LICENSE.*
+^/readme.*
+^/README.*
