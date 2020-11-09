@@ -2,5 +2,5 @@
 
 apt-get-and-save () {
     sudo apt-get "$@"
-    apt-mark showmanual > ~/kaianga-conf/bin/other-packages
+    apt-mark showmanual > ~/kainga-conf/bin/other-packages
 }
