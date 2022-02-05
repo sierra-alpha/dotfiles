@@ -1,0 +1,63 @@
+#!/bin/sh
+#
+# Switch between different audio outputs
+#
+
+set -eu
+
+BG=true
+
+while getopts "f" OPTION; do
+	case "$OPTION" in
+	f)
+		BG=false
+		;;
+	esac
+done
+shift $(($OPTIND - 1))
+
+MODE="$1"
+
+if $BG; then
+	"$0" -f "$1" &
+	exit 0
+fi
+
+# Both alsaloop and tx have poor support for daemon modes.
+# Save our PID and then exec ourselves into the process.
+
+PIDFILE="/tmp/scc.$USER"
+
+is_up()
+{
+	ps -p "$1" >& /dev/null
+}
+
+if [ -f "$PIDFILE" ]; then
+	PID=`cat "$PIDFILE"`
+
+	if is_up $PID; then
+		kill $PID
+		sleep 0.05
+
+		while is_up $PID; do
+			sleep 1
+		done
+	fi
+fi
+
+echo $$  > "$PIDFILE"
+
+case "$MODE" in
+none)
+	;;
+
+local)
+	exec alsaloop -C hubcap -P hw:PCH
+	;;
+
+*)
+	exec tx -d hubcap -m 2 -h "$MODE"
+	;;
+
+esac
