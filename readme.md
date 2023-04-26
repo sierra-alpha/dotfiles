@@ -2,7 +2,17 @@ This is a home for all my dot files, some repos such as .emacs have their own
 licence files and credits, for everything else assume the GPL3 licenses mentioned
 in licences.md
 
-The Dotfiles to get my specific config in kainga
+The Dotfiles to get my specific config in macos
+
+use to install:
+ 
+```bash
+cd ~/<.dotfiles repo clone location>
+stow -t ~ */
+```
+
+may need adopt on an already set up machine and then do a git diff to see
+the difference. (The trailing slash is to ignore all base level directories).
 
 
 Copyright (C) 2020 Shaun Alexander
