@@ -1,0 +1,3 @@
+[submodule "fish/.config/fish/functions"]
+	path = fish/.config/fish/functions
+	url = git@github.com:sierra-alpha/fish-functions.git
