@@ -1,10 +1,22 @@
 [user]
 	name = Shaun Alexander
 	email = shaun@sierraalpha.co.nz
+[includeIF "gitdir:~/mdev/ripa/"]
+  path = ~/mdev/ripa/.gitconfig_ripa
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
+[push]
+	autoSetupRemote = true
 [url "git@github.com:"]
 	insteadof = https://github.com/
 [url "git://"]
 	insteadOf = https://
+[alias]
+	glog = log --all --oneline --decorate --graph --color -10
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra

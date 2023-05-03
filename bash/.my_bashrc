@@ -3,7 +3,7 @@
 # Functions, load all my functions from the functions folder
 if [ -d ~/.bash/functions ]; then
     for f in ~/.bash/functions/*; do source "$f"; done
-fi # This is a new fi, don't confuse it with a new one.
+fi
 
 # Add local pip to path
 add_to_path "$(python3 -m site --user-base)"/bin
@@ -33,3 +33,4 @@ shopt -s checkwinsize
 # I like colours!
 force_color_prompt=yes
 
+fish || echo No Fish on this system, staying in Bash
