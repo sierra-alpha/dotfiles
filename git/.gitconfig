@@ -13,7 +13,7 @@
 [url "git://"]
   insteadOf = https://
 [alias]
-	glog = log --all --oneline --decorate --graph --color -10
+	glog = log --oneline --decorate --graph --color -10
 [pull]
 	rebase = true
 [fetch]
