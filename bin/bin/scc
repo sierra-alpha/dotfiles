@@ -57,7 +57,7 @@ local)
 	;;
 
 *)
-	exec tx -d hubcap -m 2 -h "$MODE"
+	exec trx-tx -d hubcap -m 2 -h "$MODE"
 	;;
 
 esac
