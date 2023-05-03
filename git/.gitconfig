@@ -1,17 +1,29 @@
+# gitconfig --global <some command> will change the file to be tabs
+# So dont fight it...
+#
 [init]
 	defaultBranch = main
+
 [user]
 	name = Shaun Alexander
 	email = shaun@sierraalpha.co.nz
+
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
+
+[submodule]
+	recurse = true
+
 [push]
 	autoSetupRemote = true
+
 [pull]
 	rebase = true
+
 [fetch]
 	prune = true
+
 [diff]
 	colorMoved = zebra
 
@@ -20,8 +32,10 @@
 
 [url "git@github.com:"]
 	insteadof = https://github.com/
+
 [url "git://"]
 	insteadOf = https://
 
 [includeIF "gitdir:~/mdev/ripa/"]
-  path = ~/mdev/ripa/.gitconfig_ripa
+	path = ~/mdev/ripa/.gitconfig_ripa
+
