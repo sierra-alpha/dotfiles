@@ -51,8 +51,9 @@ This function should only modify configuration layer settings."
            )
      ruby-on-rails
      rust
-     systemd
+     shell-scripts
      (sql :variables sql-capitalize-keywords t)
+     systemd
      typescript
      yaml
      ;; ----------------------------------------------------------------
@@ -520,7 +521,7 @@ It should only modify the values of Spacemacs settings."
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'changed
+   dotspacemacs-whitespace-cleanup nil
 
    ;; If non-nil activate `clean-aindent-mode' which tries to correct
    ;; virtual indentation of simple modes. This can interfere with mode specific
@@ -594,12 +595,28 @@ before packages are loaded."
   ;; Column widths set to 80 rule colour customised and set all buffers that
   ;; visit a file to display the guide line
   (setq-default fill-column 80)
-  (setq fci-rule-color "grey25")
-  ;;(add-hook 'after-change-major-mode-hook
-  ;;          (when (buffer-file-name) (fci-mode 1))
-  ;;)
+  (global-display-fill-column-indicator-mode t)
 
-  ;; Set markdown mode to auto fill to column width 9may eventually want to apply
+
+  ;; A self method to align blocks of code based on non spaces
+  ;; Ex:
+  ;;   hi = { :this => that }
+  ;;   a_longer_name = { :this_is => longer }
+  ;;
+  ;; Becomes:
+  ;;   hi            = { :this    => that   }
+  ;;   a_longer_name = { :this_is => longer }
+  ;;
+  (defun align-blocks (beg end)
+           "Align blocks as I like"
+           (interactive "r")
+           (align-regexp beg end "\\(\\s-+\\)[^\\s]" 1 1 t)
+           (indent-region beg end))
+
+  ;; Set the above to a shortcut
+  (spacemacs/set-leader-keys "oa" 'align-blocks)
+
+  ;; Set markdown mode to auto fill to column width may eventually want to apply
   ;; to all text buffers (non code buffers)
   (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 

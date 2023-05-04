@@ -1,3 +1,6 @@
 [submodule "fish/.config/fish/functions"]
 	path = fish/.config/fish/functions
 	url = git@github.com:sierra-alpha/fish-functions.git
+[submodule "fonts/.fonts/source-code-pro"]
+	path = fonts/.fonts/source-code-pro
+	url = git@github.com:adobe-fonts/source-code-pro.git
