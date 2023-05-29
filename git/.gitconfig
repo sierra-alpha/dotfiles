@@ -28,7 +28,7 @@
 	colorMoved = zebra
 
 [alias]
-	glog = log --all --oneline --decorate --graph --color -10
+	glog = log --oneline --decorate --graph --color -10
 
 [url "git@github.com:"]
 	insteadof = https://github.com/

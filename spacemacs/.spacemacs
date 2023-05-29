@@ -32,7 +32,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(php
      ;; ----------------------------------------------------------------
      ;; Language support
      ;; ----------------------------------------------------------------
@@ -509,7 +509,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
-   dotspacemacs-icon-title-format 'changed
+   dotspacemacs-icon-title-format nil
 
    ;; Color highlight trailing whitespace in all prog-mode and text-mode derived
    ;; modes such as c++-mode, python-mode, emacs-lisp, html-mode, rst-mode etc.
@@ -598,6 +598,13 @@ before packages are loaded."
   (global-display-fill-column-indicator-mode t)
 
 
+  ;; Set some Info keys
+  (spacemacs/set-leader-keys "oin" 'Info-next)
+  (spacemacs/set-leader-keys "oip" 'Info-prev)
+  (spacemacs/set-leader-keys "oif" 'Info-follow-reference)
+  (spacemacs/set-leader-keys "oi <return>" 'Info-follow-nearest-node)
+  (spacemacs/set-leader-keys "oil" 'Info-history-back)
+
   ;; A self method to align blocks of code based on non spaces
   ;; Ex:
   ;;   hi = { :this => that }
@@ -653,7 +660,7 @@ This function is called at the very end of Spacemacs initialization."
      ((:application tramp :machine "Shauns-MacBook-Pro.local")
       tramp-connection-local-darwin-ps-profile)
      ((:application tramp)
-      tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile tramp-connection-local-default-profile)) t)
+      tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)) t)
  '(connection-local-profile-alist
    '((tramp-connection-local-darwin-ps-profile
       (tramp-process-attributes-ps-args "-acxww" "-o" "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state=abcde" "-o" "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
