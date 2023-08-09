@@ -33,4 +33,5 @@ shopt -s checkwinsize
 # I like colours!
 force_color_prompt=yes
 
-fish || echo No Fish on this system, staying in Bash
+# For react launch emacs to edit files
+REACT_EDITOR=emacsclient
