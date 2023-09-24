@@ -30,6 +30,7 @@
 
 [alias]
 	glog = log --oneline --decorate --graph --color -10
+	delete-origin-merged-branch = !git branch -d $(git branch --merged origin/develop --format '%(refname:short)')
 
 [url "git@github.com:"]
 	insteadOf = git://github.com/

@@ -719,7 +719,7 @@ This function is called at the very end of Spacemacs initialization."
      ((:application tramp :machine "Shauns-MacBook-Pro.local")
       tramp-connection-local-darwin-ps-profile)
      ((:application tramp)
-      tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)) t)
+      tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
    '((tramp-connection-local-darwin-ps-profile
       (tramp-process-attributes-ps-args "-acxww" "-o" "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state=abcde" "-o" "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
@@ -792,9 +792,9 @@ This function is called at the very end of Spacemacs initialization."
       (shell-command-switch . "-c"))
      (tramp-connection-local-default-system-profile
       (path-separator . ":")
-      (null-device . "/dev/null"))) t)
+      (null-device . "/dev/null"))))
  '(debug-on-error t)
- '(flycheck-checker-error-threshold 1000)
+ '(flycheck-checker-error-threshold 10000)
  '(global-display-line-numbers-mode t)
  '(js-indent-level 2)
  '(package-selected-packages
