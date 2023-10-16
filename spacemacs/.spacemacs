@@ -619,7 +619,7 @@ before packages are loaded."
   ;; Highlight indentation
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
   (setq-default highlight-indent-guides-responsive "stack")
-  (setq-default highlight-indent-guides-method 'character)
+  ;; (setq-default highlight-indent-guides-method 'character)
 
   ;; Column widths set to 80 rule colour customised and set all buffers that
   ;; visit a file to display the guide line
