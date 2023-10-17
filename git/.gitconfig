@@ -7,7 +7,7 @@
 [user]
 	name = Shaun Alexander
 	email = shaun@sierraalpha.co.nz
-#	signingkey = 98EF9B0999EBADE4
+	signingkey = D7EB0DAC5825069D
 
 [core]
 	editor = vim
@@ -41,5 +41,5 @@
 [includeIF "gitdir:~/mdev/ripa/"]
 	path = ~/mdev/ripa/.gitconfig_ripa
 
-#[commit]
-#	gpgsign = true
+[commit]
+	gpgsign = true
