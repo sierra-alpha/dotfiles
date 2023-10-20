@@ -27,6 +27,7 @@
 
 [diff]
 	colorMoved = zebra
+	submodule = log
 
 [alias]
 	glog = log --oneline --decorate --graph --color -10
