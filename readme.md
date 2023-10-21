@@ -2,10 +2,10 @@ This is a home for all my dot files, some repos such as .emacs have their own
 licence files and credits, for everything else assume the GPL3 licenses mentioned
 in licences.md
 
-The Dotfiles to get my specific config in pop!_os
+The Dotfiles to get my specific config in <Repo Branch Name>
 
 use to install:
- 
+
 ```bash
 cd ~/<.dotfiles repo clone location>
 stow -t ~ */
