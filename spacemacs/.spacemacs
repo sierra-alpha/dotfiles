@@ -71,6 +71,7 @@ This function should only modify configuration layer settings."
                  javascript-backend 'lsp
                  javascript-fmt-tool 'prettier
                  node-add-modules-path t
+                 typescript-indent-level 2
                  )
      windows-scripts
      (yaml :variables yaml-enable-lsp t)
@@ -672,6 +673,14 @@ before packages are loaded."
   (eval-after-load 'web-mode
     '(progn
        (add-hook 'web-mode-hook #'add-node-modules-path)))
+
+  (defun my-web-mode-hook ()
+    "Hooks for Web mode."
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    )
+  (add-hook 'web-mode-hook  'my-web-mode-hook)
 
   ;; yasnippet
   (yas-global-mode 1)
