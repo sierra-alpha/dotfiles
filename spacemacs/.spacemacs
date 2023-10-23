@@ -697,9 +697,9 @@ before packages are loaded."
   ;; (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
 
   ;; pull in project config if supplied
-  (eval-after-load 'web-mode
-    '(progn
-       (add-hook 'web-mode-hook #'add-node-modules-path)))
+  ;; (eval-after-load 'web-mode
+  ;;   '(progn
+  ;;      (add-hook 'web-mode-hook #'add-node-modules-path)))
 
   ;; ;; disable smicolon check at end of lines in JS
   ;; (steq prettier-js-args '(
