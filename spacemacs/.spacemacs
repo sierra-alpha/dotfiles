@@ -667,6 +667,9 @@ before packages are loaded."
   ;; Add svg to list for macosx
   (add-to-list 'image-types 'svg)
 
+  ;; Add .env files to shell-script-mode (not working, probably need regex modifications)
+  (add-to-list 'auto-mode-alist '("^\\.env\\(\\..*\\)*$" . shell-script-mode))
+
   ;; tide def func:
   ;; (defun tide-setup-hook ()
   ;;   (tide-setup)
@@ -715,6 +718,27 @@ before packages are loaded."
   ;; flycheck
   (global-flycheck-mode)
   (add-hook 'after-init-hook #'global-flycheck-mode)
+
+  ;; Add tsh to tramp methods
+  (add-to-list 'tramp-methods
+               '("tsh"
+                 (tramp-login-program "tsh")
+                 (tramp-login-args
+                  (("ssh")
+                   ("-l" "%u")
+                   ("-p" "%p")
+                   ("%c")
+                   ("-e" "none")
+                   ("%h")))
+                 (tramp-async-args
+                  (("-q")))
+                 (tramp-direct-async t)
+                 (tramp-remote-shell ("/bin/sh" "-c"))
+                 (tramp-remote-shell-login
+                  ("-l"))
+                 (tramp-remote-shell-args
+                  ("-c"))))
+
   )
 
 

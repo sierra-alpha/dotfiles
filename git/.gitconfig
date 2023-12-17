@@ -12,6 +12,7 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
+	ignorecase = false
 
 [submodule]
 	recurse = true
@@ -30,7 +31,8 @@
 
 [alias]
 	glog = log --oneline --decorate --graph --color -10
-	delete-origin-merged-branch = !git branch -d $(git branch --merged origin/develop --format '%(refname:short)')
+	delete-origin-developed-merged-branch = !git fetch && git branch -d $(git branch --merged origin/develop --format '%(refname:short)')
+	delete-origin-main-merged-branch = !git fetch && git branch -d $(git branch --merged origin/main --format '%(refname:short)')
 
 [url "git@github.com:"]
 	insteadOf = git://github.com/
