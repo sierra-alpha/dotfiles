@@ -617,6 +617,11 @@ before packages are loaded."
   ;; Enable heading up/down a line by pressing `h` or `l` at beginning or end
   (setq-default evil-cross-lines t)
 
+  ;; Sort lines case insensitively
+  (custom-set-variables
+   '(sort-fold-case t t)
+   )
+
   ;; Highlight indentation
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
   (setq-default highlight-indent-guides-responsive "stack")
