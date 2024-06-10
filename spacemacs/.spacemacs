@@ -50,6 +50,9 @@ This function should only modify configuration layer settings."
                  javascript-linter 'eslint
                  node-add-modules-path t
                  )
+     go
+     html
+     javascript
      markdown
      org
      octave
@@ -63,6 +66,7 @@ This function should only modify configuration layer settings."
       )
      ruby-on-rails
      rust
+     salt
      shell-scripts
      (sql :variables sql-capitalize-keywords t)
      systemd
@@ -816,6 +820,7 @@ This function is called at the very end of Spacemacs initialization."
      blacken
      bmx-mode
      browse-at-remote
+     bui
      bundler
      cargo
      centered-cursor-mode
@@ -828,6 +833,7 @@ This function is called at the very end of Spacemacs initialization."
      column-enforce-mode
      company
      company-anaconda
+     company-go
      company-php
      company-phpactor
      company-web
@@ -838,6 +844,7 @@ This function is called at the very end of Spacemacs initialization."
      counsel-gtags
      ctable
      cython-mode
+     dap-mode
      dash
      deferred
      define-word
@@ -849,6 +856,7 @@ This function is called at the very end of Spacemacs initialization."
      drupal-mode
      dumb-jump
      editorconfig
+     eldoc
      elisp-def
      elisp-slime-nav
      emacsql
@@ -894,6 +902,7 @@ This function is called at the very end of Spacemacs initialization."
      flx-ido
      flycheck
      flycheck-elsa
+     flycheck-golangci-lint
      flycheck-package
      flycheck-pos-tip
      flycheck-rust
@@ -916,6 +925,15 @@ This function is called at the very end of Spacemacs initialization."
      gitignore-templates
      gntp
      gnuplot
+     go-eldoc
+     go-fill-struct
+     go-gen-test
+     go-guru
+     go-impl
+     go-mode
+     go-rename
+     go-tag
+     godoctor
      golden-ratio
      google-translate
      goto-chg
@@ -981,6 +999,7 @@ This function is called at the very end of Spacemacs initialization."
      load-env-vars
      log4e
      lorem-ipsum
+     lsp-docker
      lsp-java
      lsp-mode
      lsp-origami
