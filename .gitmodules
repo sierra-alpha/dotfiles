@@ -4,3 +4,5 @@
 [submodule "fonts/.fonts/source-code-pro"]
 	path = fonts/.fonts/source-code-pro
 	url = git@github.com:adobe-fonts/source-code-pro.git
+[submodule ".config/fish/functions/"]
+	branch = master
