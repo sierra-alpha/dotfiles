@@ -18,8 +18,9 @@
 	recurse = true
 
 [push]
-	autoSetupRemote = true
+	autosetupremote = true
 	default = current
+	autoSetupRemote = true
 
 [pull]
 	rebase = true
