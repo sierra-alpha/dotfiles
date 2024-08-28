@@ -43,8 +43,10 @@
 [url "git://"]
 	insteadOf = https://
 
-[includeIF "gitdir:~/mdev/ripa/"]
-	path = ~/mdev/ripa/.gitconfig_ripa
+[includeIF "gitdir:~/mdev/trove/"]
+	path = ~/mdev/trove/.gitconfig_trove
 
 [commit]
 	gpgsign = true
+[gpg]
+	program = gpg
