@@ -1,7 +1,7 @@
 if status is-interactive
-   # I like vi bindings 
-   fish_vi_key_bindings
+    # I like vi key bindings
+    fish_vi_key_bindings
 
-   # Nothing
-   test -e ~/.work_fish.config && source ~/.work_fish.config
+    # Run a work config file if it exists
+    test -e ~/.work_fish.config && source ~/.work_fish.config
 end
