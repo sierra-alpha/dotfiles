@@ -37,11 +37,11 @@
 	delete-origin-developed-merged-branch = !git fetch && git branch -d $(git branch --merged origin/develop --format '%(refname:short)')
 	delete-origin-main-merged-branch = !git fetch && git branch -d $(git branch --merged origin/main --format '%(refname:short)')
 
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+# [url "git@github.com:"]
+# 	insteadOf = https://github.com/
 
-[url "git://"]
-	insteadOf = https://
+# [url "git://"]
+# 	insteadOf = https://
 
 [includeIF "gitdir:~/mdev/trove/"]
 	path = ~/mdev/trove/.gitconfig_trove
