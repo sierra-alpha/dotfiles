@@ -1,2 +1,2 @@
 #env
-LESS=-RX
+LESS=-iRX
