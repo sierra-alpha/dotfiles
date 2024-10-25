@@ -6,5 +6,10 @@ if status is-interactive
     test -e ~/.work_fish.config && source ~/.work_fish.config
 end
 
-# Created by `pipx` on 2024-10-08 00:31:15
-set PATH $PATH /Users/shaun/.local/bin
+fish_add_path ~/.local/bin
+
+if test $TERM = "dumb"
+    function fish_prompt
+        echo "\$ "
+    end
+end
