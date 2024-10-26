@@ -100,7 +100,8 @@ This function should only modify configuration layer settings."
      git
      helm
      lsp
-     llm-client
+     (llm-client :variables
+                 llm-client-enable-ellama t)
      pandoc
      spell-checking
      (shell :variables
