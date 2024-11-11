@@ -4,6 +4,13 @@ if status is-interactive
 
     # Run a work config file if it exists
     test -e ~/.work_fish.config && source ~/.work_fish.config
+   
+    # Define a fish function to run hooks on prompt, should ideally be backgrounded and disowned.
+    function fish_prompt_hooks
+      if type work_prompt_hooks >/dev/null 2>&1
+          work_prompt_hooks
+      end
+    end
 end
 
 fish_add_path ~/.local/bin
