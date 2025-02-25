@@ -98,6 +98,7 @@ This function should only modify configuration layer settings."
      auto-completion
      better-defaults
      git
+     github-copilot
      helm
      lsp
      (llm-client :variables
