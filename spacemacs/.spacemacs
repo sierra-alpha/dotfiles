@@ -573,7 +573,7 @@ It should only modify the values of Spacemacs settings."
    ;; which major modes have whitespace cleanup enabled or disabled
    ;; by default.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup changed
 
    ;; If non-nil activate `clean-aindent-mode' which tries to correct
    ;; virtual indentation of simple modes. This can interfere with mode specific
@@ -776,10 +776,6 @@ before packages are loaded."
    '((dot . t))) ; this line activates dot
 
   ;; github-copilot settings
-  (add-hook 'prog-mode-hook 'copilot-mode)
-  (add-hook 'markdown-mode-hook 'copilot-mode)
-  (add-hook 'org-mode-hook 'copilot-mode)
-
   (with-eval-after-load 'copilot
     ;; Accept Copilot suggestion
     (define-key copilot-completion-map (kbd "<tab>") #'copilot-accept-completion)
@@ -789,6 +785,14 @@ before packages are loaded."
     (define-key copilot-completion-map (kbd "C-<tab>") #'copilot-accept-completion-by-word)
     (define-key copilot-completion-map (kbd "C-TAB")   #'copilot-accept-completion-by-word))
 
+  (add-hook 'prog-mode-hook 'copilot-mode)
+  (add-hook 'markdown-mode-hook 'copilot-mode)
+  (add-hook 'org-mode-hook 'copilot-mode)
+
+  ;; Remove 'newline-mark' from 'whitespace-style' helps with copilot ssuggestions jumping around
+  (setq whitespace-style (remove 'newline-mark whitespace-style))
+
+  ;; Aider Settings
   ;; Set leader key for Aidermacs
   (spacemacs/set-leader-keys "aa" 'aidermacs-transient-menu)
 

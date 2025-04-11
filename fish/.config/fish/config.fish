@@ -25,3 +25,6 @@ if test $TERM = "dumb"
         echo "\$ "
     end
 end
+
+# Created by `pipx` on 2025-04-06 04:49:36
+set PATH $PATH /home/shaun/.local/bin
