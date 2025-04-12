@@ -49,3 +49,6 @@ Thumbs.db
 *.swp
 *.swo
 
+# Aider AI #
+**/.aider*
+

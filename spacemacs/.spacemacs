@@ -124,15 +124,15 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages
-   '(
+   dotspacemacs-additional-packages '(
      add-node-modules-path
+     aidermacs
      eglot
      highlight-indent-guides
      projectile-rails
      prettier-js
      yasnippet-snippets
-     )
+   )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -820,6 +820,16 @@ before packages are loaded."
     ;; Use C-TAB to accept suggestion word-by-word (if you want this functionality)
     (define-key copilot-completion-map (kbd "C-<tab>") #'copilot-accept-completion-by-word)
     (define-key copilot-completion-map (kbd "C-TAB")   #'copilot-accept-completion-by-word))
+
+  ;; Set leader key for Aidermacs
+  (spacemacs/set-leader-keys "aa" 'aidermacs-transient-menu)
+
+  ;; Configure Aidermacs
+  (setq aidermacs-use-architect-mode t)
+  (setq aidermacs-default-model "ollama/gemma3")
+  (setq aidermacs-backend 'vterm)
+  (setq aidermacs-vterm-multiline-newline-key "S-<return>")
+  (setq aidermacs-watch-files t)
 
   )
 
