@@ -775,33 +775,41 @@ before packages are loaded."
    'org-babel-load-languages
    '((dot . t))) ; this line activates dot
 
+  ;; Configure Aidermacs
+  (setq aidermacs-use-architect-mode t)
+  (setq aidermacs-backend 'vterm)
+  (setq aidermacs-vterm-multiline-newline-key "S-<return>")
+  (setq aidermacs-watch-files t)
+
+  ;; Set leader key for Aidermacs
+  (spacemacs/set-leader-keys "aa" 'aidermacs-transient-menu)
+
+  ;; Remove 'newline-mark' from 'whitespace-style' helps with copilot suggestions jumping around
+  ;; First ensure whitespace-style is defined before modifying it
+  (with-eval-after-load 'whitespace
+    (setq whitespace-style (remove 'newline-mark whitespace-style)))
+
   ;; github-copilot settings
   (with-eval-after-load 'copilot
+    (copilot-install-server)
+
     ;; Accept Copilot suggestion
     (define-key copilot-completion-map (kbd "<tab>") #'copilot-accept-completion)
     (define-key copilot-completion-map (kbd "TAB")   #'copilot-accept-completion)
 
     ;; Use C-TAB to accept suggestion word-by-word (if you want this functionality)
     (define-key copilot-completion-map (kbd "C-<tab>") #'copilot-accept-completion-by-word)
-    (define-key copilot-completion-map (kbd "C-TAB")   #'copilot-accept-completion-by-word))
+    (define-key copilot-completion-map (kbd "C-TAB")   #'copilot-accept-completion-by-word)
 
+    ;; Use C-n C-p to go back and forth in copilot suggestions
+    (define-key copilot-completion-map (kbd "C-l") #'copilot-next-completion)
+    (define-key copilot-completion-map (kbd "C-h") #'copilot-previous-completion)
+    )
+
+  ;; Add for other modes
   (add-hook 'prog-mode-hook 'copilot-mode)
   (add-hook 'markdown-mode-hook 'copilot-mode)
   (add-hook 'org-mode-hook 'copilot-mode)
-
-  ;; Remove 'newline-mark' from 'whitespace-style' helps with copilot suggestions jumping around
-  (setq whitespace-style (remove 'newline-mark whitespace-style))
-
-  ;; Aider Settings
-  ;; Set leader key for Aidermacs
-  (spacemacs/set-leader-keys "aa" 'aidermacs-transient-menu)
-
-  ;; Configure Aidermacs
-  (setq aidermacs-use-architect-mode t)
-  (setq aidermacs-backend 'vterm)
-  (setq aidermacs-vterm-multiline-newline-key "S-<return>")
-  (setq aidermacs-watch-files t)
-  (setq aidermacs-default-model "")
 
   )
 
