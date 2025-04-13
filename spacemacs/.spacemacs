@@ -789,8 +789,8 @@ before packages are loaded."
   (add-hook 'markdown-mode-hook 'copilot-mode)
   (add-hook 'org-mode-hook 'copilot-mode)
 
-  ;; Remove 'newline-mark' from 'whitespace-style' helps with copilot ssuggestions jumping around
-  ;; (setq 'whitespace-style (remove 'newline-mark 'whitespace-style))
+  ;; Remove 'newline-mark' from 'whitespace-style' helps with copilot suggestions jumping around
+  (setq whitespace-style (remove 'newline-mark whitespace-style))
 
   ;; Aider Settings
   ;; Set leader key for Aidermacs
@@ -801,6 +801,7 @@ before packages are loaded."
   (setq aidermacs-backend 'vterm)
   (setq aidermacs-vterm-multiline-newline-key "S-<return>")
   (setq aidermacs-watch-files t)
+  (setq aidermacs-default-model "")
 
   )
 
