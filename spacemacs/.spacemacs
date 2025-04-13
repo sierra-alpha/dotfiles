@@ -573,7 +573,7 @@ It should only modify the values of Spacemacs settings."
    ;; which major modes have whitespace cleanup enabled or disabled
    ;; by default.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup changed
+   dotspacemacs-whitespace-cleanup 'changed
 
    ;; If non-nil activate `clean-aindent-mode' which tries to correct
    ;; virtual indentation of simple modes. This can interfere with mode specific
@@ -790,7 +790,7 @@ before packages are loaded."
   (add-hook 'org-mode-hook 'copilot-mode)
 
   ;; Remove 'newline-mark' from 'whitespace-style' helps with copilot ssuggestions jumping around
-  (setq whitespace-style (remove 'newline-mark whitespace-style))
+  ;; (setq 'whitespace-style (remove 'newline-mark 'whitespace-style))
 
   ;; Aider Settings
   ;; Set leader key for Aidermacs
