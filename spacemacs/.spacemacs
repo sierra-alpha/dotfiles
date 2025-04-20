@@ -776,6 +776,7 @@ before packages are loaded."
    '((dot . t))) ; this line activates dot
 
   ;; Configure Aidermacs
+  (setq aidermacs-default-model "github_copilot/claude-3.7-sonnet-thought")
   (setq aidermacs-use-architect-mode t)
   (setq aidermacs-backend 'vterm)
   (setq aidermacs-vterm-multiline-newline-key "S-<return>")
