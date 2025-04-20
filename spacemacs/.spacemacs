@@ -780,6 +780,7 @@ before packages are loaded."
   (setq aidermacs-backend 'vterm)
   (setq aidermacs-vterm-multiline-newline-key "S-<return>")
   (setq aidermacs-watch-files t)
+  (setq aidermacs-show-diff-after-change t)
 
   ;; Set leader key for Aidermacs
   (spacemacs/set-leader-keys "aa" 'aidermacs-transient-menu)
