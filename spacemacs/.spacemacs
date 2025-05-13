@@ -59,6 +59,7 @@ This function should only modify configuration layer settings."
      ipython-notebook
      javascript
      markdown
+     mermaid
      org
      octave
      (
@@ -653,6 +654,8 @@ before packages are loaded."
   ;; visit a file to display the guide line
   (setq-default fill-column 80)
   (global-display-fill-column-indicator-mode t)
+  (add-hook 'org-mode-hook (lambda nil
+                             (auto-fill-mode 1)))
 
   ;; Set some Info keys
   (spacemacs/set-leader-keys "oin" 'Info-next)
@@ -751,32 +754,42 @@ before packages are loaded."
   (add-hook 'after-init-hook #'global-flycheck-mode)
 
   ;; Add tsh to tramp methods
-  (add-to-list 'tramp-methods
-               '("tsh"
-                 (tramp-login-program "tsh")
-                 (tramp-login-args
-                  (("ssh")
-                   ("-l" "%u")
-                   ("-p" "%p")
-                   ("%c")
-                   ("-e" "none")
-                   ("%h")))
-                 (tramp-async-args
-                  (("-q")))
-                 (tramp-direct-async t)
-                 (tramp-remote-shell ("/bin/sh" "-c"))
-                 (tramp-remote-shell-login
-                  ("-l"))
-                 (tramp-remote-shell-args
-                  ("-c"))))
+  (with-eval-after-load 'tramp
+    (add-to-list 'tramp-methods
+                 '("tsh"
+                   (tramp-login-program "tsh")
+                   (tramp-login-args
+                    (("ssh")
+                     ("-l" "%u")
+                     ("-p" "%p")
+                     ("%c")
+                     ("-e" "none")
+                     ("%h")))
+                   (tramp-async-args
+                    (("-q")))
+                   (tramp-direct-async t)
+                   (tramp-remote-shell ("/bin/sh" "-c"))
+                   (tramp-remote-shell-login
+                    ("-l"))
+                   (tramp-remote-shell-args
+                    ("-c")))))
 
   ;; Add to orgmode babel
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((dot . t))) ; this line activates dot
+   '(
+     (mermaid . t) ; this line activates mermaid
+     (scheme . t)
+     (dot . t) ; this line activates dot
+     )
+   )
+
+  ;; Mermaid for org mode
+  (setq ob-mermaid-cli-path "mmdc")
 
   ;; Configure Aidermacs
-  (setq aidermacs-default-model "github_copilot/claude-3.7-sonnet-thought")
+  ;; (setq aidermacs-default-model "github_copilot/claude-3.7-sonnet-thought")
+  (setq aidermacs-default-model "github_copilot/gemini-2.5-pro")
   (setq aidermacs-use-architect-mode t)
   (setq aidermacs-backend 'vterm)
   (setq aidermacs-vterm-multiline-newline-key "S-<return>")
@@ -793,7 +806,6 @@ before packages are loaded."
 
   ;; github-copilot settings
   (with-eval-after-load 'copilot
-    (copilot-install-server)
 
     ;; Accept Copilot suggestion
     (define-key copilot-completion-map (kbd "<tab>") #'copilot-accept-completion)
@@ -915,8 +927,81 @@ This function is called at the very end of Spacemacs initialization."
    '(highlight-indent-guides-responsive "stack")
    '(ignored-local-variable-values '((js2-basic-offset . 2)))
    '(package-selected-packages
-     '(docker tablist aio dockerfile-mode ellama llm plz gptel ein polymode anaphora websocket graphql-mode coffee-mode company-go company-terraform go-eldoc go-fill-struct go-gen-test go-guru go-impl go-rename go-tag go-mode godoctor ob-coffeescript salt-mode mmm-jinja2 terraform-mode hcl-mode ac-ispell ac-php-core ace-jump-helm-line ace-link ace-window add-node-modules-path aggressive-indent alert all-the-icons anaconda-mode annalist anzu async auto-compile auto-complete auto-dictionary auto-highlight-symbol auto-yasnippet avy bind-key bind-map blacken bmx-mode browse-at-remote bundler cargo centered-cursor-mode cfrs chruby clang-format clean-aindent-mode closql code-cells column-enforce-mode company company-anaconda company-php company-phpactor company-web compat composer concurrent counsel counsel-gtags ctable cython-mode dash deferred define-word devdocs diminish dired-quick-sort dotenv-mode drag-stuff drupal-mode dumb-jump editorconfig elisp-def elisp-slime-nav emacsql emmet-mode emr epc epl esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil evil-anzu evil-args evil-cleverparens evil-collection evil-easymotion evil-escape evil-evilified-state evil-exchange evil-goggles evil-iedit-state evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-org evil-surround evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar expand-region eyebrowse f fancy-battery feature-mode flx flx-ido flycheck flycheck-elsa flycheck-package flycheck-pos-tip flycheck-rust flyspell-correct flyspell-correct-helm forge fringe-helper fuzzy geben ggtags gh-md ghub git-commit git-gutter git-gutter-fringe git-link git-messenger git-modes git-timemachine gitignore-templates gntp gnuplot golden-ratio google-translate goto-chg groovy-imports groovy-mode haml-mode helm helm-ag helm-c-yasnippet helm-company helm-core helm-css-scss helm-descbinds helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager helm-org helm-org-rifle helm-projectile helm-purpose helm-pydoc helm-swoop helm-themes helm-xref help-fns+ hide-comnt hierarchy highlight-indent-guides highlight-indentation highlight-numbers highlight-parentheses hl-todo holy-mode ht htmlize hungry-delete hybrid-mode hydra iedit imenu-list impatient-mode importmagic indent-guide inf-ruby inflections info+ inspector ivy journalctl-mode js-doc js2-mode js2-refactor json-mode json-navigator json-reformat json-snatcher link-hint list-utils live-py-mode livid-mode load-env-vars log4e lorem-ipsum lsp-java lsp-mode lsp-origami lsp-pyright lsp-python-ms lsp-treemacs lsp-ui lv macrostep magit magit-section markdown-mode markdown-toc maven-test-mode minitest mmm-mode multi-line multi-term multi-vterm multiple-cursors mvn mwim nameless nodejs-repl nose npm-mode open-junk-file org org-category-capture org-cliplink org-contrib org-download org-mime org-pomodoro org-present org-projectile org-rich-yank org-superstar orgit orgit-forge origami overseer ox-pandoc package-lint pandoc-mode paradox paredit parent-mode password-generator pcache pcre2el persistent-scratch persp-mode pfuture php-auto-yasnippets php-extras php-mode php-runtime phpactor phpcbf phpunit pip-requirements pipenv pippel pkg-info poetry popup popwin pos-tip posframe powerline powershell prettier-js projectile projectile-rails pug-mode py-isort pydoc pyenv-mode pylookup pytest pythonic pyvenv queue quickrun racer rainbow-delimiters rake rbenv request restart-emacs robe ron-mode rspec-mode rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rust-mode rvm s sass-mode scss-mode seeing-is-believing shell-pop shut-up simple-httpd skewer-mode slim-mode smartparens smeargle space-doc spaceline spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc spinner sql-indent sqlup-mode string-edit-at-point string-inflection swift-mode swiper symbol-overlay symon systemd tagedit term-cursor terminal-here tern tide toc-org toml-mode transient treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp treemacs-projectile treepy undo-tree unfill unkillable-scratch use-package uuidgen vi-tilde-fringe vim-powerline visual-fill-column volatile-highlights vterm web-beautify web-completion-data web-mode which-key window-purpose winum with-editor writeroom-mode ws-butler xah-fly-keys xcscope xref xterm-color yaml yaml-mode yapfify yasnippet yasnippet-snippets))
-   '(sort-fold-case t t)
+     '(ac-ispell ac-php-core ace-jump-helm-line ace-link ace-window
+                 add-node-modules-path aggressive-indent aio alert all-the-icons
+                 anaconda-mode anaphora annalist anzu async auto-compile
+                 auto-complete auto-dictionary auto-highlight-symbol
+                 auto-yasnippet avy bind-key bind-map blacken bmx-mode
+                 browse-at-remote bundler cargo centered-cursor-mode cfrs chruby
+                 clang-format clean-aindent-mode closql code-cells coffee-mode
+                 column-enforce-mode company company-anaconda company-go
+                 company-php company-phpactor company-terraform company-web compat
+                 composer concurrent counsel counsel-gtags ctable cython-mode dash
+                 deferred define-word devdocs diminish dired-quick-sort docker
+                 dockerfile-mode dotenv-mode drag-stuff drupal-mode dumb-jump
+                 editorconfig ein elisp-def elisp-slime-nav ellama emacsql
+                 emmet-mode emr epc epl esh-help eshell-prompt-extras eshell-z
+                 eval-sexp-fu evil evil-anzu evil-args evil-cleverparens
+                 evil-collection evil-easymotion evil-escape evil-evilified-state
+                 evil-exchange evil-goggles evil-iedit-state evil-indent-plus
+                 evil-lion evil-lisp-state evil-matchit evil-mc
+                 evil-nerd-commenter evil-numbers evil-org evil-surround
+                 evil-textobj-line evil-tutor evil-unimpaired
+                 evil-visual-mark-mode evil-visualstar expand-region eyebrowse f
+                 fancy-battery feature-mode flx flx-ido flycheck flycheck-elsa
+                 flycheck-package flycheck-pos-tip flycheck-rust flyspell-correct
+                 flyspell-correct-helm forge fringe-helper fuzzy geben ggtags
+                 gh-md ghub git-commit git-gutter git-gutter-fringe git-link
+                 git-messenger git-modes git-timemachine gitignore-templates gntp
+                 gnuplot go-eldoc go-fill-struct go-gen-test go-guru go-impl
+                 go-mode go-rename go-tag godoctor golden-ratio google-translate
+                 goto-chg gptel graphql-mode groovy-imports groovy-mode haml-mode
+                 hcl-mode helm helm-ag helm-c-yasnippet helm-company helm-core
+                 helm-css-scss helm-descbinds helm-git-grep helm-ls-git helm-lsp
+                 helm-make helm-mode-manager helm-org helm-org-rifle
+                 helm-projectile helm-purpose helm-pydoc helm-swoop helm-themes
+                 helm-xref help-fns+ hide-comnt hierarchy highlight-indent-guides
+                 highlight-indentation highlight-numbers highlight-parentheses
+                 hl-todo holy-mode ht htmlize hungry-delete hybrid-mode hydra
+                 iedit imenu-list impatient-mode importmagic indent-guide inf-ruby
+                 inflections info+ inspector ivy journalctl-mode js-doc js2-mode
+                 js2-refactor json-mode json-navigator json-reformat json-snatcher
+                 link-hint list-utils live-py-mode livid-mode llm load-env-vars
+                 log4e lorem-ipsum lsp-java lsp-mode lsp-origami lsp-pyright
+                 lsp-python-ms lsp-treemacs lsp-ui lv macrostep magit
+                 magit-section markdown-mode markdown-toc maven-test-mode minitest
+                 mmm-jinja2 mmm-mode multi-line multi-term multi-vterm
+                 multiple-cursors mvn mwim nameless nodejs-repl nose npm-mode
+                 ob-coffeescript ob-mermaid open-junk-file org
+                 org-category-capture org-cliplink org-contrib org-download
+                 org-mime org-pomodoro org-present org-projectile org-rich-yank
+                 org-superstar orgit orgit-forge origami overseer ox-pandoc
+                 package-lint pandoc-mode paradox paredit parent-mode
+                 password-generator pcache pcre2el persistent-scratch persp-mode
+                 pfuture php-auto-yasnippets php-extras php-mode php-runtime
+                 phpactor phpcbf phpunit pip-requirements pipenv pippel pkg-info
+                 plz poetry polymode popup popwin pos-tip posframe powerline
+                 powershell prettier-js projectile projectile-rails pug-mode
+                 py-isort pydoc pyenv-mode pylookup pytest pythonic pyvenv queue
+                 quickrun racer rainbow-delimiters rake rbenv request
+                 restart-emacs robe ron-mode rspec-mode rubocop rubocopfmt
+                 ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools
+                 rust-mode rvm s salt-mode sass-mode scss-mode seeing-is-believing
+                 shell-pop shut-up simple-httpd skewer-mode slim-mode smartparens
+                 smeargle space-doc spaceline spacemacs-purpose-popwin
+                 spacemacs-whitespace-cleanup sphinx-doc spinner sql-indent
+                 sqlup-mode string-edit-at-point string-inflection swift-mode
+                 swiper symbol-overlay symon systemd tablist tagedit term-cursor
+                 terminal-here tern terraform-mode tide toc-org toml-mode
+                 transient treemacs treemacs-evil treemacs-icons-dired
+                 treemacs-magit treemacs-persp treemacs-projectile treepy
+                 undo-tree unfill unkillable-scratch use-package uuidgen
+                 vi-tilde-fringe vim-powerline visual-fill-column
+                 volatile-highlights vterm web-beautify web-completion-data
+                 web-mode websocket which-key window-purpose winum with-editor
+                 writeroom-mode ws-butler xah-fly-keys xcscope xref xterm-color
+                 yaml yaml-mode yapfify yasnippet yasnippet-snippets))
+   '(sort-fold-case t)
    '(tool-bar-mode nil))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
