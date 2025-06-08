@@ -130,7 +130,8 @@ This function should only modify configuration layer settings."
                                       aidermacs
                                       eglot
                                       highlight-indent-guides
-                                      projectile-rails
+                                      ob-mermaid
+                                      projectil-rails
                                       prettier-js
                                       yasnippet-snippets
                                       )
