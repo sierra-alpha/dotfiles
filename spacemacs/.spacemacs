@@ -790,7 +790,8 @@ before packages are loaded."
 
   ;; Configure Aidermacs
   ;; (setq aidermacs-default-model "ollama_chat/llama3.2")
-  (setq aidermacs-default-model "github_copilot/claude-3.7-sonnet-thought")
+  (setq aidermacs-default-model "github_copilot/gpt-4.1")
+  ;; (setq aidermacs-default-model "github_copilot/claude-3.7-sonnet-thought")
   ;; (setq aidermacs-default-model "github_copilot/claude-4-opus-thought")
   ;; (setq aidermacs-default-model "github_copilot/gemini-2.5-pro")
   (setq aidermacs-use-architect-mode t)
