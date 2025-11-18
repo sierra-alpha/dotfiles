@@ -790,46 +790,222 @@ before packages are loaded."
 
   ;; Configure Aidermacs
   ;; (setq aidermacs-default-model "ollama_chat/llama3.2")
-  (setq aidermacs-default-model "github_copilot/gpt-4.1")
-  ;; (setq aidermacs-default-model "github_copilot/claude-3.7-sonnet-thought")
+  ;; (setq aidermacs-default-model "openai/claude-3.7-sonnet-thought")
   ;; (setq aidermacs-default-model "github_copilot/claude-4-opus-thought")
   ;; (setq aidermacs-default-model "github_copilot/gemini-2.5-pro")
+  ;; (setq aidermacs-default-model "openai/gpt-4o")
+  ;; (setenv "OPENAI_API_BASE" "https://api.githubcopilot.com")
   (setq aidermacs-use-architect-mode t)
   (setq aidermacs-backend 'vterm)
   (setq aidermacs-vterm-multiline-newline-key "S-<return>")
   (setq aidermacs-watch-files t)
-  (setq aidermacs-show-diff-after-change t)
+  (setq aidermacs-show-diff-after-change f)
 
   ;; Set leader key for Aidermacs
   (spacemacs/set-leader-keys "aa" 'aidermacs-transient-menu)
 
-  ;; Remove 'newline-mark' from 'whitespace-style' helps with copilot suggestions jumping around
-  ;; First ensure whitespace-style is defined before modifying it
-  (with-eval-after-load 'whitespace
-    (setq whitespace-style (remove 'newline-mark whitespace-style)))
+  ;; Remove 'newline-mark' from 'whitespace-style' helps with (custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+  '(blink-cursor-mode nil)
+  '(column-number-mode t)
+  '(connection-local-criteria-alist
+    '(((:application tramp :protocol "kubernetes")
+       tramp-kubernetes-connection-local-default-profile)
+      ((:application tramp :machine "Shauns-Air.localdomain")
+       tramp-connection-local-darwin-ps-profile)
+      ((:application tramp :machine "Shauns-Air")
+       tramp-connection-local-darwin-ps-profile)
+      ((:application tramp :machine "Shauns-MacBook-Air.local")
+       tramp-connection-local-darwin-ps-profile)
+      ((:application eshell) eshell-connection-default-profile)
+      ((:application tramp :machine "localhost")
+       tramp-connection-local-darwin-ps-profile)
+      ((:application tramp :machine "Shauns-MacBook-Pro.local")
+       tramp-connection-local-darwin-ps-profile)
+      ((:application tramp) tramp-connection-local-default-system-profile
+       tramp-connection-local-default-shell-profile
+       tramp-connection-local-default-profile)))
+  '(connection-local-profile-alist
+    '((tramp-kubernetes-connection-local-default-profile
+       (tramp-config-check . tramp-kubernetes--current-context-data)
+       (tramp-extra-expand-args 97
+                                (tramp-kubernetes--container
+                                 (car tramp-current-connection))
+                                104
+                                (tramp-kubernetes--pod
+                                 (car tramp-current-connection))
+                                120
+                                (tramp-kubernetes--context-namespace
+                                 (car tramp-current-connection))))
+      (eshell-connection-default-profile (eshell-path-env-list))
+      (tramp-connection-local-darwin-ps-profile
+       (tramp-process-attributes-ps-args "-acxww" "-o"
+                                         "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                         "-o" "state=abcde" "-o"
+                                         "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
+       (tramp-process-attributes-ps-format (pid . number) (euid . number)
+                                           (user . string) (egid . number)
+                                           (comm . 52) (state . 5)
+                                           (ppid . number) (pgrp . number)
+                                           (sess . number) (ttname . string)
+                                           (tpgid . number) (minflt . number)
+                                           (majflt . number)
+                                           (time . tramp-ps-time) (pri . number)
+                                           (nice . number) (vsize . number)
+                                           (rss . number) (etime . tramp-ps-time)
+                                           (pcpu . number) (pmem . number) (args)))
+      (tramp-connection-local-busybox-ps-profile
+       (tramp-process-attributes-ps-args "-o"
+                                         "pid,user,group,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                         "-o" "stat=abcde" "-o"
+                                         "ppid,pgid,tty,time,nice,etime,args")
+       (tramp-process-attributes-ps-format (pid . number) (user . string)
+                                           (group . string) (comm . 52)
+                                           (state . 5) (ppid . number)
+                                           (pgrp . number) (ttname . string)
+                                           (time . tramp-ps-time) (nice . number)
+                                           (etime . tramp-ps-time) (args)))
+      (tramp-connection-local-bsd-ps-profile
+       (tramp-process-attributes-ps-args "-acxww" "-o"
+                                         "pid,euid,user,egid,egroup,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                         "-o"
+                                         "state,ppid,pgid,sid,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etimes,pcpu,pmem,args")
+       (tramp-process-attributes-ps-format (pid . number) (euid . number)
+                                           (user . string) (egid . number)
+                                           (group . string) (comm . 52)
+                                           (state . string) (ppid . number)
+                                           (pgrp . number) (sess . number)
+                                           (ttname . string) (tpgid . number)
+                                           (minflt . number) (majflt . number)
+                                           (time . tramp-ps-time) (pri . number)
+                                           (nice . number) (vsize . number)
+                                           (rss . number) (etime . number)
+                                           (pcpu . number) (pmem . number) (args)))
+      (tramp-connection-local-default-shell-profile (shell-file-name . "/bin/sh")
+                                                    (shell-command-switch . "-c"))
+      (tramp-connection-local-default-system-profile (path-separator . ":")
+                                                     (null-device . "/dev/null"))))
+  '(copilot-enable-predicates '(spacemacs//copilot-enable-predicate))
+  '(debug-on-error t)
+  '(evil-want-Y-yank-to-eol nil)
+  '(flycheck-checker-error-threshold 1000)
+  '(global-display-line-numbers-mode t)
+  '(highlight-indent-guides-method 'character)
+  '(highlight-indent-guides-responsive "stack")
+  '(ignored-local-variable-values '((js2-basic-offset . 2)))
+  '(package-selected-packages
+    '(ac-ispell ac-php-core ace-jump-helm-line ace-link ace-window
+                add-node-modules-path aggressive-indent aio alert all-the-icons
+                anaconda-mode anaphora annalist anzu async auto-compile
+                auto-complete auto-dictionary auto-highlight-symbol
+                auto-yasnippet avy bind-key bind-map blacken bmx-mode
+                browse-at-remote bundler cargo centered-cursor-mode cfrs chruby
+                clang-format clean-aindent-mode closql code-cells coffee-mode
+                column-enforce-mode company company-anaconda company-go
+                company-php company-phpactor company-terraform company-web compat
+                composer concurrent counsel counsel-gtags ctable cython-mode dash
+                deferred define-word devdocs diminish dired-quick-sort docker
+                dockerfile-mode dotenv-mode drag-stuff drupal-mode dumb-jump
+                editorconfig ein elisp-def elisp-slime-nav ellama emacsql
+                emmet-mode emr epc epl esh-help eshell-prompt-extras eshell-z
+                eval-sexp-fu evil evil-anzu evil-args evil-cleverparens
+                evil-collection evil-easymotion evil-escape evil-evilified-state
+                evil-exchange evil-goggles evil-iedit-state evil-indent-plus
+                evil-lion evil-lisp-state evil-matchit evil-mc
+                evil-nerd-commenter evil-numbers evil-org evil-surround
+                evil-textobj-line evil-tutor evil-unimpaired
+                evil-visual-mark-mode evil-visualstar expand-region eyebrowse f
+                fancy-battery feature-mode flx flx-ido flycheck flycheck-elsa
+                flycheck-package flycheck-pos-tip flycheck-rust flyspell-correct
+                flyspell-correct-helm forge fringe-helper fuzzy geben ggtags
+                gh-md ghub git-commit git-gutter git-gutter-fringe git-link
+                git-messenger git-modes git-timemachine gitignore-templates gntp
+                gnuplot go-eldoc go-fill-struct go-gen-test go-guru go-impl
+                go-mode go-rename go-tag godoctor golden-ratio google-translate
+                goto-chg gptel graphql-mode groovy-imports groovy-mode haml-mode
+                hcl-mode helm helm-ag helm-c-yasnippet helm-company helm-core
+                helm-css-scss helm-descbinds helm-git-grep helm-ls-git helm-lsp
+                helm-make helm-mode-manager helm-org helm-org-rifle
+                helm-projectile helm-purpose helm-pydoc helm-swoop helm-themes
+                helm-xref help-fns+ hide-comnt hierarchy highlight-indent-guides
+                highlight-indentation highlight-numbers highlight-parentheses
+                hl-todo holy-mode ht htmlize hungry-delete hybrid-mode hydra
+                iedit imenu-list impatient-mode importmagic indent-guide inf-ruby
+                inflections info+ inspector ivy journalctl-mode js-doc js2-mode
+                js2-refactor json-mode json-navigator json-reformat json-snatcher
+                link-hint list-utils live-py-mode livid-mode llm load-env-vars
+                log4e lorem-ipsum lsp-java lsp-mode lsp-origami lsp-pyright
+                lsp-python-ms lsp-treemacs lsp-ui lv macrostep magit
+                magit-section markdown-mode markdown-toc maven-test-mode minitest
+                mmm-jinja2 mmm-mode multi-line multi-term multi-vterm
+                multiple-cursors mvn mwim nameless nodejs-repl nose npm-mode
+                ob-coffeescript ob-mermaid open-junk-file org
+                org-category-capture org-cliplink org-contrib org-download
+                org-mime org-pomodoro org-present org-projectile org-rich-yank
+                org-superstar orgit orgit-forge origami overseer ox-pandoc
+                package-lint pandoc-mode paradox paredit parent-mode
+                password-generator pcache pcre2el persistent-scratch persp-mode
+                pfuture php-auto-yasnippets php-extras php-mode php-runtime
+                phpactor phpcbf phpunit pip-requirements pipenv pippel pkg-info
+                plz poetry polymode popup popwin pos-tip posframe powerline
+                powershell prettier-js projectile projectile-rails pug-mode
+                py-isort pydoc pyenv-mode pylookup pytest pythonic pyvenv queue
+                quickrun racer rainbow-delimiters rake rbenv request
+                restart-emacs robe ron-mode rspec-mode rubocop rubocopfmt
+                ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools
+                rust-mode rvm s salt-mode sass-mode scss-mode seeing-is-believing
+                shell-pop shut-up simple-httpd skewer-mode slim-mode smartparens
+                smeargle space-doc spaceline spacemacs-purpose-popwin
+                spacemacs-whitespace-cleanup sphinx-doc spinner sql-indent
+                sqlup-mode string-edit-at-point string-inflection swift-mode
+                swiper symbol-overlay symon systemd tablist tagedit term-cursor
+                terminal-here tern terraform-mode tide toc-org toml-mode
+                transient treemacs treemacs-evil treemacs-icons-dired
+                treemacs-magit treemacs-persp treemacs-projectile treepy
+                undo-tree unfill unkillable-scratch use-package uuidgen
+                vi-tilde-fringe vim-powerline visual-fill-column
+                volatile-highlights vterm web-beautify web-completion-data
+                web-mode websocket which-key window-purpose winum with-editor
+                writeroom-mode ws-butler xah-fly-keys xcscope xref xterm-color
+                yaml yaml-mode yapfify yasnippet yasnippet-snippets))
+  '(sort-fold-case t t)
+  '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
+)copilot suggestions jumping around
+;; First ensure whitespace-style is defined before modifying it
+(with-eval-after-load 'whitespace
+  (setq whitespace-style (remove 'newline-mark whitespace-style)))
 
-  ;; github-copilot settings
-  (with-eval-after-load 'copilot
+;; github-copilot settings
+(with-eval-after-load 'copilot
 
-    ;; Accept Copilot suggestion
-    (define-key copilot-completion-map (kbd "<tab>") #'copilot-accept-completion)
-    (define-key copilot-completion-map (kbd "TAB")   #'copilot-accept-completion)
+  ;; Accept Copilot suggestion
+  (define-key copilot-completion-map (kbd "<tab>") #'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB")   #'copilot-accept-completion)
 
-    ;; Use C-TAB to accept suggestion word-by-word (if you want this functionality)
-    (define-key copilot-completion-map (kbd "C-<tab>") #'copilot-accept-completion-by-word)
-    (define-key copilot-completion-map (kbd "C-TAB")   #'copilot-accept-completion-by-word)
+  ;; Use C-TAB to accept suggestion word-by-word (if you want this functionality)
+  (define-key copilot-completion-map (kbd "C-<tab>") #'copilot-accept-completion-by-word)
+  (define-key copilot-completion-map (kbd "C-TAB")   #'copilot-accept-completion-by-word)
 
-    ;; Use C-n C-p to go back and forth in copilot suggestions
-    (define-key copilot-completion-map (kbd "C-l") #'copilot-next-completion)
-    (define-key copilot-completion-map (kbd "C-h") #'copilot-previous-completion)
-    )
-
-  ;; Add for other modes
-  (add-hook 'prog-mode-hook 'copilot-mode)
-  (add-hook 'markdown-mode-hook 'copilot-mode)
-  (add-hook 'org-mode-hook 'copilot-mode)
-
+  ;; Use C-n C-p to go back and forth in copilot suggestions
+  (define-key copilot-completion-map (kbd "C-l") #'copilot-next-completion)
+  (define-key copilot-completion-map (kbd "C-h") #'copilot-previous-completion)
   )
+
+;; Add for other modes
+(add-hook 'prog-mode-hook 'copilot-mode)
+(add-hook 'markdown-mode-hook 'copilot-mode)
+(add-hook 'org-mode-hook 'copilot-mode)
+
+)
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -839,178 +1015,3 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(blink-cursor-mode nil)
-   '(column-number-mode t)
-   '(connection-local-criteria-alist
-     '(((:application tramp :protocol "kubernetes")
-        tramp-kubernetes-connection-local-default-profile)
-       ((:application tramp :machine "Shauns-Air.localdomain")
-        tramp-connection-local-darwin-ps-profile)
-       ((:application tramp :machine "Shauns-Air")
-        tramp-connection-local-darwin-ps-profile)
-       ((:application tramp :machine "Shauns-MacBook-Air.local")
-        tramp-connection-local-darwin-ps-profile)
-       ((:application eshell) eshell-connection-default-profile)
-       ((:application tramp :machine "localhost")
-        tramp-connection-local-darwin-ps-profile)
-       ((:application tramp :machine "Shauns-MacBook-Pro.local")
-        tramp-connection-local-darwin-ps-profile)
-       ((:application tramp) tramp-connection-local-default-system-profile
-        tramp-connection-local-default-shell-profile
-        tramp-connection-local-default-profile)))
-   '(connection-local-profile-alist
-     '((tramp-kubernetes-connection-local-default-profile
-        (tramp-config-check . tramp-kubernetes--current-context-data)
-        (tramp-extra-expand-args 97
-                                 (tramp-kubernetes--container
-                                  (car tramp-current-connection))
-                                 104
-                                 (tramp-kubernetes--pod
-                                  (car tramp-current-connection))
-                                 120
-                                 (tramp-kubernetes--context-namespace
-                                  (car tramp-current-connection))))
-       (eshell-connection-default-profile (eshell-path-env-list))
-       (tramp-connection-local-darwin-ps-profile
-        (tramp-process-attributes-ps-args "-acxww" "-o"
-                                          "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                          "-o" "state=abcde" "-o"
-                                          "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
-        (tramp-process-attributes-ps-format (pid . number) (euid . number)
-                                            (user . string) (egid . number)
-                                            (comm . 52) (state . 5)
-                                            (ppid . number) (pgrp . number)
-                                            (sess . number) (ttname . string)
-                                            (tpgid . number) (minflt . number)
-                                            (majflt . number)
-                                            (time . tramp-ps-time) (pri . number)
-                                            (nice . number) (vsize . number)
-                                            (rss . number) (etime . tramp-ps-time)
-                                            (pcpu . number) (pmem . number) (args)))
-       (tramp-connection-local-busybox-ps-profile
-        (tramp-process-attributes-ps-args "-o"
-                                          "pid,user,group,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                          "-o" "stat=abcde" "-o"
-                                          "ppid,pgid,tty,time,nice,etime,args")
-        (tramp-process-attributes-ps-format (pid . number) (user . string)
-                                            (group . string) (comm . 52)
-                                            (state . 5) (ppid . number)
-                                            (pgrp . number) (ttname . string)
-                                            (time . tramp-ps-time) (nice . number)
-                                            (etime . tramp-ps-time) (args)))
-       (tramp-connection-local-bsd-ps-profile
-        (tramp-process-attributes-ps-args "-acxww" "-o"
-                                          "pid,euid,user,egid,egroup,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                                          "-o"
-                                          "state,ppid,pgid,sid,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etimes,pcpu,pmem,args")
-        (tramp-process-attributes-ps-format (pid . number) (euid . number)
-                                            (user . string) (egid . number)
-                                            (group . string) (comm . 52)
-                                            (state . string) (ppid . number)
-                                            (pgrp . number) (sess . number)
-                                            (ttname . string) (tpgid . number)
-                                            (minflt . number) (majflt . number)
-                                            (time . tramp-ps-time) (pri . number)
-                                            (nice . number) (vsize . number)
-                                            (rss . number) (etime . number)
-                                            (pcpu . number) (pmem . number) (args)))
-       (tramp-connection-local-default-shell-profile (shell-file-name . "/bin/sh")
-                                                     (shell-command-switch . "-c"))
-       (tramp-connection-local-default-system-profile (path-separator . ":")
-                                                      (null-device . "/dev/null"))))
-   '(debug-on-error t)
-   '(evil-want-Y-yank-to-eol nil)
-   '(flycheck-checker-error-threshold 1000)
-   '(global-display-line-numbers-mode t)
-   '(highlight-indent-guides-method 'character)
-   '(highlight-indent-guides-responsive "stack")
-   '(ignored-local-variable-values '((js2-basic-offset . 2)))
-   '(package-selected-packages
-     '(ac-ispell ac-php-core ace-jump-helm-line ace-link ace-window
-                 add-node-modules-path aggressive-indent aio alert all-the-icons
-                 anaconda-mode anaphora annalist anzu async auto-compile
-                 auto-complete auto-dictionary auto-highlight-symbol
-                 auto-yasnippet avy bind-key bind-map blacken bmx-mode
-                 browse-at-remote bundler cargo centered-cursor-mode cfrs chruby
-                 clang-format clean-aindent-mode closql code-cells coffee-mode
-                 column-enforce-mode company company-anaconda company-go
-                 company-php company-phpactor company-terraform company-web compat
-                 composer concurrent counsel counsel-gtags ctable cython-mode dash
-                 deferred define-word devdocs diminish dired-quick-sort docker
-                 dockerfile-mode dotenv-mode drag-stuff drupal-mode dumb-jump
-                 editorconfig ein elisp-def elisp-slime-nav ellama emacsql
-                 emmet-mode emr epc epl esh-help eshell-prompt-extras eshell-z
-                 eval-sexp-fu evil evil-anzu evil-args evil-cleverparens
-                 evil-collection evil-easymotion evil-escape evil-evilified-state
-                 evil-exchange evil-goggles evil-iedit-state evil-indent-plus
-                 evil-lion evil-lisp-state evil-matchit evil-mc
-                 evil-nerd-commenter evil-numbers evil-org evil-surround
-                 evil-textobj-line evil-tutor evil-unimpaired
-                 evil-visual-mark-mode evil-visualstar expand-region eyebrowse f
-                 fancy-battery feature-mode flx flx-ido flycheck flycheck-elsa
-                 flycheck-package flycheck-pos-tip flycheck-rust flyspell-correct
-                 flyspell-correct-helm forge fringe-helper fuzzy geben ggtags
-                 gh-md ghub git-commit git-gutter git-gutter-fringe git-link
-                 git-messenger git-modes git-timemachine gitignore-templates gntp
-                 gnuplot go-eldoc go-fill-struct go-gen-test go-guru go-impl
-                 go-mode go-rename go-tag godoctor golden-ratio google-translate
-                 goto-chg gptel graphql-mode groovy-imports groovy-mode haml-mode
-                 hcl-mode helm helm-ag helm-c-yasnippet helm-company helm-core
-                 helm-css-scss helm-descbinds helm-git-grep helm-ls-git helm-lsp
-                 helm-make helm-mode-manager helm-org helm-org-rifle
-                 helm-projectile helm-purpose helm-pydoc helm-swoop helm-themes
-                 helm-xref help-fns+ hide-comnt hierarchy highlight-indent-guides
-                 highlight-indentation highlight-numbers highlight-parentheses
-                 hl-todo holy-mode ht htmlize hungry-delete hybrid-mode hydra
-                 iedit imenu-list impatient-mode importmagic indent-guide inf-ruby
-                 inflections info+ inspector ivy journalctl-mode js-doc js2-mode
-                 js2-refactor json-mode json-navigator json-reformat json-snatcher
-                 link-hint list-utils live-py-mode livid-mode llm load-env-vars
-                 log4e lorem-ipsum lsp-java lsp-mode lsp-origami lsp-pyright
-                 lsp-python-ms lsp-treemacs lsp-ui lv macrostep magit
-                 magit-section markdown-mode markdown-toc maven-test-mode minitest
-                 mmm-jinja2 mmm-mode multi-line multi-term multi-vterm
-                 multiple-cursors mvn mwim nameless nodejs-repl nose npm-mode
-                 ob-coffeescript ob-mermaid open-junk-file org
-                 org-category-capture org-cliplink org-contrib org-download
-                 org-mime org-pomodoro org-present org-projectile org-rich-yank
-                 org-superstar orgit orgit-forge origami overseer ox-pandoc
-                 package-lint pandoc-mode paradox paredit parent-mode
-                 password-generator pcache pcre2el persistent-scratch persp-mode
-                 pfuture php-auto-yasnippets php-extras php-mode php-runtime
-                 phpactor phpcbf phpunit pip-requirements pipenv pippel pkg-info
-                 plz poetry polymode popup popwin pos-tip posframe powerline
-                 powershell prettier-js projectile projectile-rails pug-mode
-                 py-isort pydoc pyenv-mode pylookup pytest pythonic pyvenv queue
-                 quickrun racer rainbow-delimiters rake rbenv request
-                 restart-emacs robe ron-mode rspec-mode rubocop rubocopfmt
-                 ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools
-                 rust-mode rvm s salt-mode sass-mode scss-mode seeing-is-believing
-                 shell-pop shut-up simple-httpd skewer-mode slim-mode smartparens
-                 smeargle space-doc spaceline spacemacs-purpose-popwin
-                 spacemacs-whitespace-cleanup sphinx-doc spinner sql-indent
-                 sqlup-mode string-edit-at-point string-inflection swift-mode
-                 swiper symbol-overlay symon systemd tablist tagedit term-cursor
-                 terminal-here tern terraform-mode tide toc-org toml-mode
-                 transient treemacs treemacs-evil treemacs-icons-dired
-                 treemacs-magit treemacs-persp treemacs-projectile treepy
-                 undo-tree unfill unkillable-scratch use-package uuidgen
-                 vi-tilde-fringe vim-powerline visual-fill-column
-                 volatile-highlights vterm web-beautify web-completion-data
-                 web-mode websocket which-key window-purpose winum with-editor
-                 writeroom-mode ws-butler xah-fly-keys xcscope xref xterm-color
-                 yaml yaml-mode yapfify yasnippet yasnippet-snippets))
-   '(sort-fold-case t)
-   '(tool-bar-mode nil))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
-  )
