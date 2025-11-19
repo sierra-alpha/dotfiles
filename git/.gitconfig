@@ -34,8 +34,8 @@
 
 [alias]
 	glog = log --oneline --decorate --graph --color -10
-	delete-origin-developed-merged-branch = !git fetch && git branch -d $(git branch --merged origin/develop --format '%(refname:short)')
-	delete-origin-main-merged-branch = !git fetch && git branch -d $(git branch --merged origin/main --format '%(refname:short)')
+	delete-local-on-origin-merged-branch = !git fetch && git branch -d $(git branch --merged origin/"$1" --format '%(refname:short)')
+	root = rev-parse --show-toplevel
 
 # [url "git@github.com:"]
 # 	insteadOf = https://github.com/
@@ -59,4 +59,4 @@
 	suffix = -beta.
 	suffix = -rc
 [tag]
-	sort = -v:refname
+	sort = v:refname
