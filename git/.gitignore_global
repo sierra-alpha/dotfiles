@@ -52,3 +52,8 @@ Thumbs.db
 # Aider AI #
 **/.aider*
 
+
+**/.claude/settings.local.json
+**/.claude*
+
+.claude/

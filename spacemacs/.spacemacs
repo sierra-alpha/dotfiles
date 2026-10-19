@@ -37,8 +37,8 @@ This function should only modify configuration layer settings."
      ;; Language support
      ;; ----------------------------------------------------------------
      ansible ;; For jinga2
-     csv
      coffeescript
+     csv
      docker
      emacs-lisp
      (groovy :variables
@@ -131,7 +131,6 @@ This function should only modify configuration layer settings."
                                       eglot
                                       highlight-indent-guides
                                       ob-mermaid
-                                      projectil-rails
                                       prettier-js
                                       yasnippet-snippets
                                       )
@@ -643,6 +642,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; ;; Env vars, make sure we get the same as the terminal
+  ;; (shell-copy-environment-variables '("OPENAI_API_BASE", "OPENAI_BASE_URL", "OPENAI_API_KEY"))
 
   ;; Enable heading up/down a line by pressing `h` or `l` at beginning or end
   (setq-default evil-cross-lines t)
@@ -700,6 +701,7 @@ before packages are loaded."
   ;; Auto revert buffers when files change on disk (if not modified)
   ;; Taken from here: http://pragmaticemacs.com/emacs/automatically-revert-buffers/
   (global-auto-revert-mode 1)
+
   ;; Do the same for Dired
   (add-hook 'dired-mode-hook 'auto-revert-mode)
 
@@ -715,40 +717,6 @@ before packages are loaded."
   ;; Add .env files to shell-script-mode (not working, probably need regex modifications)
   (add-to-list 'auto-mode-alist '("^\\.env\\(\\..*\\)*$" . shell-script-mode))
 
-  ;; tide def func:
-  ;; (defun tide-setup-hook ()
-  ;;   (tide-setup)
-  ;;   (eldoc-mode)
-  ;;   (tide-hl-identifier-mode +1)
-  ;;   (setq web-mode-enable-auto-quoting nil)
-  ;;   (setq web-mode-markup-indent-offset 2)
-  ;;   (setq web-mode-code-indent-offset 2)
-  ;;   (setq web-mode-attr-indent-offset 2)
-  ;;   (setq web-mode-attr-value-indent-offset 2)
-  ;;   (setq lsp-eslint-server-command '("node" (concat "/usr/local/bin/eslint") "--stdin"))
-  ;;   (set (make-local-variable 'company-backends)
-  ;;        '((company-tide company-files :with company-yasnippet)
-  ;;          (company-dabbrev-code company-dabbrev))))
-
-  ;; ;; use rjsx-mode for .js* files except json and use tide with rjsx
-  ;; (add-to-list 'auto-mode-alist '("\\.js.*$" . rjsx-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
-  ;; (add-hook 'rjsx-mode-hook 'tide-setup-hook)
-
-  ;; ;; web-mode extra config
-  ;; (add-hook 'web-mode-hook 'tide-setup-hook
-  ;;           (lambda () (pcase (file-name-extension buffer-file-name)
-  ;;                        ("tsx" ('tide-setup-hook))
-  ;;                        (_ (my-web-mode-hook)))))
-  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
-  ;; (add-hook 'web-mode-hook 'company-mode)
-  ;; (add-hook 'web-mode-hook #'turn-on-smartparens-mode t)
-
-  ;; pull in project config if supplied
-  ;; (eval-after-load 'web-mode
-  ;;   '(progn
-  ;;      (add-hook 'web-mode-hook #'add-node-modules-path)))
-
   (defun my-web-mode-hook ()
     "Hooks for Web mode."
     (setq web-mode-markup-indent-offset 2)
@@ -763,27 +731,6 @@ before packages are loaded."
   ;; flycheck
   (global-flycheck-mode)
   (add-hook 'after-init-hook #'global-flycheck-mode)
-
-  ;; Add tsh to tramp methods
-  (with-eval-after-load 'tramp
-    (add-to-list 'tramp-methods
-                 '("tsh"
-                   (tramp-login-program "tsh")
-                   (tramp-login-args
-                    (("ssh")
-                     ("-l" "%u")
-                     ("-p" "%p")
-                     ("%c")
-                     ("-e" "none")
-                     ("%h")))
-                   (tramp-async-args
-                    (("-q")))
-                   (tramp-direct-async t)
-                   (tramp-remote-shell ("/bin/sh" "-c"))
-                   (tramp-remote-shell-login
-                    ("-l"))
-                   (tramp-remote-shell-args
-                    ("-c")))))
 
   ;; Add to orgmode babel
   (org-babel-do-load-languages
@@ -803,13 +750,12 @@ before packages are loaded."
   ;; (setq aidermacs-default-model "openai/claude-3.7-sonnet-thought")
   ;; (setq aidermacs-default-model "github_copilot/claude-4-opus-thought")
   ;; (setq aidermacs-default-model "github_copilot/gemini-2.5-pro")
-  ;; (setq aidermacs-default-model "openai/gpt-4o")
-  ;; (setenv "OPENAI_API_BASE" "https://api.githubcopilot.com")
+  (setq aidermacs-default-model "openai/gpt-4o")
   (setq aidermacs-use-architect-mode t)
   (setq aidermacs-backend 'vterm)
   (setq aidermacs-vterm-multiline-newline-key "S-<return>")
   (setq aidermacs-watch-files t)
-  (setq aidermacs-show-diff-after-change f)
+  ;; (setq aidermacs-show-diff-after-change f)
 
   ;; Set leader key for Aidermacs
   (spacemacs/set-leader-keys "aa" 'aidermacs-transient-menu)
@@ -940,7 +886,7 @@ This function is called at the very end of Spacemacs initialization."
    '(global-display-line-numbers-mode t)
    '(highlight-indent-guides-method 'character)
    '(highlight-indent-guides-responsive "stack")
-   '(ignored-local-variable-values '((js2-basic-offset . 2)))
+   '(ignored-local-variable-values '((hcl-indent-level . 2) (js2-basic-offset . 2)))
    '(package-selected-packages
      '(ac-ispell ac-php-core ace-jump-helm-line ace-link ace-window
                  add-node-modules-path aggressive-indent aio alert all-the-icons
@@ -948,20 +894,20 @@ This function is called at the very end of Spacemacs initialization."
                  auto-complete auto-dictionary auto-highlight-symbol
                  auto-yasnippet avy bind-key bind-map blacken bmx-mode
                  browse-at-remote bundler cargo centered-cursor-mode cfrs chruby
-                 clang-format clean-aindent-mode closql code-cells coffee-mode
-                 column-enforce-mode company company-anaconda company-go
-                 company-php company-phpactor company-terraform company-web compat
-                 composer concurrent counsel counsel-gtags ctable cython-mode dash
-                 deferred define-word devdocs diminish dired-quick-sort docker
-                 dockerfile-mode dotenv-mode drag-stuff drupal-mode dumb-jump
-                 editorconfig ein elisp-def elisp-slime-nav ellama emacsql
-                 emmet-mode emr epc epl esh-help eshell-prompt-extras eshell-z
-                 eval-sexp-fu evil evil-anzu evil-args evil-cleverparens
-                 evil-collection evil-easymotion evil-escape evil-evilified-state
-                 evil-exchange evil-goggles evil-iedit-state evil-indent-plus
-                 evil-lion evil-lisp-state evil-matchit evil-mc
-                 evil-nerd-commenter evil-numbers evil-org evil-surround
-                 evil-textobj-line evil-tutor evil-unimpaired
+                 clang-format claude-code-ide clean-aindent-mode closql code-cells
+                 coffee-mode column-enforce-mode company company-anaconda
+                 company-go company-php company-phpactor company-terraform
+                 company-web compat composer concurrent counsel counsel-gtags
+                 ctable cython-mode dash deferred define-word devdocs diminish
+                 dired-quick-sort docker dockerfile-mode dotenv-mode drag-stuff
+                 drupal-mode dumb-jump editorconfig ein elisp-def elisp-slime-nav
+                 ellama emacsql emmet-mode emr epc epl esh-help
+                 eshell-prompt-extras eshell-z eval-sexp-fu evil evil-anzu
+                 evil-args evil-cleverparens evil-collection evil-easymotion
+                 evil-escape evil-evilified-state evil-exchange evil-goggles
+                 evil-iedit-state evil-indent-plus evil-lion evil-lisp-state
+                 evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-org
+                 evil-surround evil-textobj-line evil-tutor evil-unimpaired
                  evil-visual-mark-mode evil-visualstar expand-region eyebrowse f
                  fancy-battery feature-mode flx flx-ido flycheck flycheck-elsa
                  flycheck-package flycheck-pos-tip flycheck-rust flyspell-correct
@@ -1013,10 +959,10 @@ This function is called at the very end of Spacemacs initialization."
                  undo-tree unfill unkillable-scratch use-package uuidgen
                  vi-tilde-fringe vim-powerline visual-fill-column
                  volatile-highlights vterm web-beautify web-completion-data
-                 web-mode websocket which-key window-purpose winum with-editor
-                 writeroom-mode ws-butler xah-fly-keys xcscope xref xterm-color
-                 yaml yaml-mode yapfify yasnippet yasnippet-snippets))
-   '(sort-fold-case t)
+                 web-mode web-server websocket which-key window-purpose winum
+                 with-editor writeroom-mode ws-butler xah-fly-keys xcscope xref
+                 xterm-color yaml yaml-mode yapfify yasnippet yasnippet-snippets))
+   '(sort-fold-case t t)
    '(tool-bar-mode nil))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
